@@ -9,7 +9,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='14' fill='%230071e3'/><path d='M13 15c3-2 6-2 9 0v18c-3-2-6-2-9 0V15Zm22 0c-3-2-6-2-9 0v18c3-2 6-2 9 0V15Z' fill='white'/></svg>">
 <script>
 (function(){try{
-  if(localStorage.getItem('ra-theme')==='dark'){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}
+  var stored=localStorage.getItem('ra-theme');
+  var dark=stored==='dark'||(!stored&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if(dark){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}
   if(localStorage.getItem('ra-lang')==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}
 }catch(e){}})();
 </script>
@@ -29,6 +31,46 @@
   <span class="blob blob-teal"></span>
   <span class="blob blob-violet"></span>
 </div>
+
+<!-- ===================== DESKTOP SIDEBAR ===================== -->
+<aside class="app-sidebar" aria-label="التنقل الرئيسي" data-i18n-title="mainNav">
+  <a class="sidebar-brand" href="#" id="sidebar-home">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <rect x="2" y="2" width="44" height="44" rx="14" fill="#10a37f"/>
+      <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".95"/>
+      <path d="M35 14.6c-3.3-2-6.6-2-9.9 0v18.2c3.3-2 6.6-2 9.9 0V14.6Z" fill="white" fill-opacity=".75"/>
+    </svg>
+    <span>
+      <strong data-i18n="brandTitle">دليل الأبحاث الحديثية</strong>
+      <small data-i18n="footerNote">استرجاع فقط — لا أحكام مولّدة آليًا</small>
+    </span>
+  </a>
+
+  <button type="button" class="new-chat-btn" data-view="ask">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    <span data-i18n="newChat">محادثة جديدة</span>
+  </button>
+
+  <span class="sidebar-label" data-i18n="mainNav">التنقل الرئيسي</span>
+  <nav class="sidebar-nav" aria-label="التنقل الرئيسي" data-i18n-title="mainNav">
+    <button type="button" class="nav-link active" data-view="ask" data-i18n="navAsk">اسأل</button>
+    <button type="button" class="nav-link" data-view="books" data-i18n="navWorkspace">مساحة العمل</button>
+    <button type="button" class="nav-link user-only" data-view="history" hidden data-i18n="navHistory">السجل</button>
+    <button type="button" class="nav-link admin-only" data-view="users" hidden data-i18n="navUsers">المستخدمون</button>
+    <button type="button" class="nav-link admin-only" data-view="add" hidden data-i18n="navSources">المصادر</button>
+    <button type="button" class="nav-link admin-only" data-view="admin" data-i18n="navAdmin">الإدارة</button>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div class="sidebar-actions">
+      <button type="button" class="icon-btn" id="theme-toggle-sidebar" aria-label="تبديل المظهر" data-i18n-title="themeToggle" title="تبديل المظهر">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+      </button>
+      <span class="sidebar-note" data-i18n="footerNote">استرجاع فقط — لا أحكام مولّدة آليًا</span>
+    </div>
+  </div>
+</aside>
 
 <header class="site-header">
   <div class="header-inner">

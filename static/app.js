@@ -8,7 +8,7 @@ const I18N = {
     pageTitle: 'دليل الأبحاث الحديثية — مساعد البحث والتوثيق',
     brandTitle: 'دليل الأبحاث الحديثية',
     brandSubtitle: 'الاسترجاع والتوثيق لنصوص أحاديث الأحكام والنقولات',
-    mainNav: 'التنقل الرئيسي', navAsk: 'اسأل', navWorkspace: 'مساحة العمل',
+    mainNav: 'التنقل الرئيسي', navAsk: 'اسأل', navWorkspace: 'مساحة العمل', newChat: 'محادثة جديدة',
     navHistory: 'السجل', navUsers: 'المستخدمون', navSources: 'المصادر', navAdmin: 'الإدارة',
     themeToggle: 'تبديل المظهر', openMenu: 'فتح القائمة', signIn: 'دخول',
     chatTitle: 'مساعد البحث في الأحاديث والنقولات',
@@ -118,7 +118,7 @@ const I18N = {
     pageTitle: 'Hadith Research Assistant — Search & Citation',
     brandTitle: 'Hadith Research Guide',
     brandSubtitle: 'Retrieval and citation for hadith and classical quotations',
-    mainNav: 'Main navigation', navAsk: 'Ask', navWorkspace: 'Workspace',
+    mainNav: 'Main navigation', navAsk: 'Ask', navWorkspace: 'Workspace', newChat: 'New chat',
     navHistory: 'History', navUsers: 'Users', navSources: 'Sources', navAdmin: 'Admin',
     themeToggle: 'Toggle theme', openMenu: 'Open menu', signIn: 'Sign in',
     chatTitle: 'Hadith and quotation research assistant',
@@ -353,20 +353,21 @@ function applyLanguage(next) {
   syncMethodNote();
 }
 
-const themeToggle = $('theme-toggle');
+const themeToggles = $$('#theme-toggle, #theme-toggle-sidebar');
 function syncThemeLabel() {
-  const dark = document.documentElement.classList.contains('dark');
   const label = t('themeToggle');
-  themeToggle.setAttribute('aria-label', label);
-  themeToggle.title = dark ? t('themeToggle') : t('themeToggle');
+  themeToggles.forEach((button) => {
+    button.setAttribute('aria-label', label);
+    button.title = label;
+  });
 }
 syncThemeLabel();
-themeToggle.addEventListener('click', () => {
+themeToggles.forEach((button) => button.addEventListener('click', () => {
   const dark = document.documentElement.classList.toggle('dark');
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
   try { localStorage.setItem('ra-theme', dark ? 'dark' : 'light'); } catch (error) { /* storage blocked */ }
   syncThemeLabel();
-});
+}));
 document.documentElement.classList.add('theme-ready');
 $('lang-toggle').addEventListener('click', () => applyLanguage(lang === 'ar' ? 'en' : 'ar'));
 
@@ -388,6 +389,7 @@ $$('[data-view]').forEach((button) => {
   button.addEventListener('click', (event) => { event.preventDefault(); setView(button.dataset.view); });
 });
 $('brand-home').addEventListener('click', (event) => { event.preventDefault(); setView('ask'); });
+$('sidebar-home').addEventListener('click', (event) => { event.preventDefault(); setView('ask'); });
 const navDrawer = $('nav-drawer');
 const navBackdrop = $('nav-backdrop');
 navDrawer.inert = true;
