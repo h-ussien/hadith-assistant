@@ -1,0 +1,14 @@
+# Local runtime data — never commit accounts, history, or imports
+research.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Vercel local state
+.vercel/
