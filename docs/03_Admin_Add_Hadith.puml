@@ -1,0 +1,13 @@
+@startuml
+title 03 Admin Add Hadith
+actor Administrator
+participant UI
+participant Admin
+participant Database
+Administrator -> UI : submit new Hadith
+UI -> Admin : addHadith(record) [authorized]
+Admin -> Database : addHadith(record)
+Database -> Admin : stored / rejected
+Admin -> UI : operation result
+UI -> Administrator : display confirmation
+@enduml

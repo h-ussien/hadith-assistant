@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>دليل الأبحاث الحديثية — مساعد البحث والتوثيق</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='14' fill='%230071e3'/><path d='M13 15c3-2 6-2 9 0v18c-3-2-6-2-9 0V15Zm22 0c-3-2-6-2-9 0v18c3-2 6-2 9 0V15Z' fill='white'/></svg>">
+<script>
+(function(){try{
+  if(localStorage.getItem('ra-theme')==='dark'){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}
+  if(localStorage.getItem('ra-lang')==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}
+}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="brandGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0071e3"/><stop offset="0.55" stop-color="#00c7be"/><stop offset="1" stop-color="#bf5af2"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="ambient" aria-hidden="true">
+  <span class="blob blob-blue"></span>
+  <span class="blob blob-teal"></span>
+  <span class="blob blob-violet"></span>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="glass-nav nav-shell">
+      <a class="brand" href="#" id="brand-home" aria-label="الصفحة الرئيسية">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#brandGrad)"/>
+            <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".94"/>
+            <path d="M35 14.6c-3.3-1.8-6.6-1.8-9.9 0v18.2c3.3-1.8 6.6-1.8 9.9 0V14.6Z" fill="white" fill-opacity=".72"/>
+            <path d="M24 15v17" stroke="white" stroke-opacity=".6"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong data-i18n="brandTitle">دليل الأبحاث الحديثية</strong>
+          <small data-i18n="brandSubtitle">الاسترجاع والتوثيق لنصوص أحاديث الأحكام والنقولات</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <button type="button" class="lang-btn" id="lang-toggle" aria-label="English" title="English"><span id="lang-label">EN</span></button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="تبديل المظهر" data-i18n-title="themeToggle" title="الوضع الداكن">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+        <button type="button" class="btn btn-primary account-btn" id="login-btn">
+          <span id="account-name" data-i18n="signIn">دخول</span>
+          <span id="account-role" class="role-badge" hidden></span>
+        </button>
+        <button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="فتح القائمة" data-i18n-title="openMenu" aria-expanded="false" aria-controls="nav-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== ASK / SEARCH ===================== -->
+  <section class="view" id="ask-view">
+    <div class="chat-shell" id="chat-shell">
+      <div class="search-hero">
+        <div class="chat-head">
+          <h1 data-i18n="chatTitle">مساعد البحث في الأحاديث والنقولات</h1>
+          <p data-i18n="chatSubtitle">استرجاع النصوص ومصادرها من المكتبة الشاملة أو الدرر السنية أو فهارسك المحلية — دون توليد فتاوى أو أحكام.</p>
+        </div>
+
+        <div class="composer-wrap" id="composer-wrap">
+          <form class="composer glass-strong" id="ask-form" dir="rtl">
+            <label class="sr-only" for="query" data-i18n="queryLabel">اكتب نص الحديث أو النقل للبحث</label>
+            <textarea id="query" rows="2" dir="auto" data-i18n-placeholder="queryPlaceholder" placeholder="اكتب النص هنا… (Enter للإرسال)"></textarea>
+            <div class="composer-rule"></div>
+            <div class="composer-bar">
+              <label class="sr-only" for="scope" data-i18n="scopeLabel">نطاق البحث</label>
+              <select id="scope">
+                <option value="shamela" data-i18n="scopeShamela">المكتبة الشاملة</option>
+                <option value="dorar" data-i18n="scopeDorar">الدرر السنية (dorar.net)</option>
+                <option value="hadith" data-i18n="scopeHadith">الأحاديث (الفهرس المحلي)</option>
+                <option value="quote" data-i18n="scopeQuote">النقولات (الفهرس المحلي)</option>
+                <option value="all" data-i18n="scopeAll">كل المصادر (المحلي)</option>
+              </select>
+              <span class="method-note" id="method-note" data-i18n="methodNote">النتائج من أربعة كتب فقط: صحيح البخاري، صحيح مسلم، سنن أبي داود، جامع الترمذي — استرجاع نصوص بلا فتاوى.</span>
+              <span id="status" class="status" role="status"></span>
+              <button type="submit" class="send-btn" id="search" aria-label="إرسال" data-i18n-title="send" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="conversation" id="conversation" aria-live="polite">
+        <div class="empty-state" id="empty-state">
+          <span class="empty-mark glass" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#brandGrad)"/>
+              <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".94"/>
+              <path d="M35 14.6c-3.3-1.8-6.6-1.8-9.9 0v18.2c3.3-1.8 6.6-1.8 9.9 0V14.6Z" fill="white" fill-opacity=".72"/>
+            </svg>
+          </span>
+          <p class="empty-title" data-i18n="emptyTitle">كلُّ نصٍّ بمصدره.</p>
+          <p class="empty-hint" data-i18n="emptyHint">اكتب مقطعًا من حديث أو نقل، وستظهر النصوص المطابقة من المكتبة الشاملة أو الدرر السنية أو فهارسك مع المصدر ورابطه.</p>
+          <div class="suggestions">
+            <button type="button" class="chip" data-q="إنما الأعمال بالنيات">إنما الأعمال بالنيات</button>
+            <button type="button" class="chip" data-q="الدين النصيحة">الدين النصيحة</button>
+            <button type="button" class="chip" data-q="من كان يؤمن بالله واليوم الآخر فليقل خيرا أو ليصمت">من كان يؤمن بالله واليوم الآخر فليقل خيرا أو ليصمت</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BOOKS / WORKSPACE ===================== -->
+  <section class="view" id="books-view" hidden>
+    <div class="page-shell">
+      <div class="page-head">
+        <h1 data-i18n="booksTitle">مساحة العمل</h1>
+        <p data-i18n="booksSubtitle">ابحث في المقتطفات المستوردة من كتبك، وأدر فهارسك المحلية.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="glass card">
+          <h2 data-i18n="bookSearchTitle">البحث في كتبي المستوردة</h2>
+          <p class="muted" data-i18n="bookSearchHint">يبحث هذا الفهرس في النقولات التي تستوردها بنفسك. لا توجد مكتبة كاملة أو نسخة «الشاملة» مرفقة، والسجلات المستوردة لا تُوثَّق آليًا.</p>
+          <label for="book-kind" data-i18n="textKind">نوع النص</label>
+          <select id="book-kind">
+            <option value="hadith" data-i18n="wordHadith">حديث</option>
+            <option value="quote" data-i18n="wordQuote">نقل كلاسيكي</option>
+          </select>
+          <label for="book-query" data-i18n="textOrExcerpt">النص أو المقطع</label>
+          <textarea id="book-query" dir="rtl" data-i18n-placeholder="bookQueryPlaceholder" placeholder="أدخل جزءًا من الحديث أو النص"></textarea>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="book-search" data-i18n="searchMyBooks">ابحث في كتبي</button>
+            <span id="book-status" class="status" role="status"></span>
+          </div>
+        </article>
+
+        <article class="glass card admin-only" id="admin-import" hidden>
+          <h2><span data-i18n="importTitle">استيراد فهرس كتاب</span> <span class="tag" data-i18n="adminOnly">للمدير فقط</span></h2>
+          <p class="muted" data-i18n="importHint">ارفع ملف CSV بترميز UTF-8 بالأعمدة: kind, passage, book, author, chapter, hadith_number, volume, page, edition, url, note. صف واحد لكل نص كامل. الحد الأقصى ٢ ميجابايت / ٣٠٠٠ صف.</p>
+          <input type="file" id="book-file" accept=".csv,text/csv">
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="book-import" data-i18n="importFile">استيراد الملف</button>
+            <span id="import-status" class="status" role="status"></span>
+          </div>
+        </article>
+      </div>
+
+      <article class="glass card stats-card">
+        <h2 data-i18n="statsTitle">إحصاءات الفهارس</h2>
+        <p id="book-stats" class="muted" data-i18n="loadingStats">جارٍ التحميل…</p>
+      </article>
+
+      <div class="results-list" id="books-results" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===================== ADD SOURCE ===================== -->
+  <section class="view" id="add-view" hidden>
+    <div class="page-shell narrow">
+      <div class="page-head">
+        <h1 data-i18n="addTitle">إضافة مصدر</h1>
+        <p data-i18n="addSubtitle">أضف نصًا تحققت منه مقابل طبعة فعلية. لا يتحقق النموذج من صحة المدخلات آليًا.</p>
+      </div>
+      <form class="glass card form-card" id="add-panel">
+        <label for="add-passage" data-i18n="passageRequired">نص النقل أو الحديث *</label>
+        <textarea name="passage" id="add-passage" required dir="auto"></textarea>
+        <div class="two">
+          <div><label for="add-book" data-i18n="bookRequired">عنوان الكتاب *</label><input name="book" id="add-book" required></div>
+          <div><label for="add-author" data-i18n="authorRequired">المؤلف *</label><input name="author" id="add-author" required></div>
+          <div><label for="add-volume" data-i18n="volume">المجلد</label><input name="volume" id="add-volume"></div>
+          <div><label for="add-page" data-i18n="page">الصفحة</label><input name="page" id="add-page"></div>
+        </div>
+        <label for="add-reference" data-i18n="referenceRequired">بيانات الطبعة / المرجع *</label>
+        <input name="reference" id="add-reference" required>
+        <label for="add-url" data-i18n="sourceUrlOptional">رابط المصدر (اختياري)</label>
+        <input name="url" id="add-url" type="url" dir="ltr">
+        <label for="add-note" data-i18n="notes">ملاحظات</label>
+        <input name="note" id="add-note">
+        <label class="verify"><input type="checkbox" name="verified" value="true" required> <span data-i18n="verifyText">راجعتُ هذا النص وبياناته الببليوغرافية مقابل الطبعة المذكورة.</span></label>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" data-i18n="addToLocal">إضافة إلى الفهرس المحلي</button>
+          <span id="add-status" class="status" role="status"></span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== USERS ===================== -->
+  <section class="view" id="users-view" hidden>
+    <div class="page-shell">
+      <div class="page-head">
+        <h1 data-i18n="usersTitle">المستخدمون</h1>
+        <p data-i18n="usersSubtitle">قائمة الحسابات المسجلة مع اسم المستخدم والبريد الإلكتروني الفريد وطريقة الدخول.</p>
+      </div>
+      <article class="glass card table-card">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th data-i18n="username">اسم المستخدم</th>
+                <th data-i18n="email">البريد الإلكتروني</th>
+                <th data-i18n="role">الدور</th>
+                <th data-i18n="provider">طريقة الدخول</th>
+                <th data-i18n="created">تاريخ الإنشاء</th>
+              </tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+        <p id="users-status" class="status" role="status"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== HISTORY ===================== -->
+  <section class="view" id="history-view" hidden>
+    <div class="page-shell">
+      <div class="page-head">
+        <h1 data-i18n="historyTitle">سجل البحث</h1>
+        <p data-i18n="historySubtitle">تظهر هنا عمليات البحث التي أجريتها بعد تسجيل الدخول. عمليات الضيوف لا تُحفظ.</p>
+      </div>
+      <article class="glass card">
+        <div class="form-actions between">
+          <h2 data-i18n="mySearches">عمليات البحث الخاصة بي</h2>
+          <button type="button" class="btn btn-ghost" id="clear-history" data-i18n="clearHistory">مسح السجل</button>
+        </div>
+        <div id="history-list" class="history-list" aria-live="polite"></div>
+        <p id="history-status" class="status" role="status"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== ADMIN ===================== -->
+  <section class="view" id="admin-view" hidden>
+    <div class="page-shell narrow">
+      <div class="page-head">
+        <h1 data-i18n="adminTitle">الإدارة</h1>
+        <p data-i18n="adminSubtitle">يمكن للمدير فقط إضافة السجلات أو استيرادها أو حذفها. يستطيع الطلاب البحث ونسخ الاستشهادات دون تسجيل دخول.</p>
+      </div>
+
+      <article class="glass card">
+        <div class="form-actions between">
+          <h2 data-i18n="signedInAs">الحساب الحالي</h2>
+          <button type="button" class="btn btn-ghost" id="logout-admin" data-i18n="signOut">تسجيل الخروج</button>
+        </div>
+        <p id="admin-status" class="muted" role="status"></p>
+      </article>
+
+      <article class="glass card" id="admin-users-card" hidden>
+        <h2 data-i18n="accountsList">الحسابات المسجلة</h2>
+        <div id="admin-users" class="user-list"></div>
+      </article>
+
+      <div id="admin-tools" hidden>
+        <article class="glass card">
+          <div class="form-actions between"><h2 data-i18n="adminTools">أدوات المدير</h2></div>
+          <h3 data-i18n="addVerifiedHadith">إضافة حديث موثّق</h3>
+          <form id="hadith-form" class="form-card">
+            <label for="h-passage" data-i18n="hadithTextRequired">نص الحديث كاملًا *</label>
+            <textarea name="passage" id="h-passage" dir="rtl" required></textarea>
+            <div class="two">
+              <div><label for="h-book" data-i18n="bookRequired">عنوان الكتاب *</label><input name="book" id="h-book" required></div>
+              <div><label for="h-author" data-i18n="authorRequired">المؤلف *</label><input name="author" id="h-author" required></div>
+              <div><label for="h-reference" data-i18n="referenceRequired">المرجع / الطبعة *</label><input name="reference" id="h-reference" required></div>
+              <div><label for="h-chapter" data-i18n="chapter">الباب</label><input name="chapter" id="h-chapter"></div>
+              <div><label for="h-number" data-i18n="hadithNumber">رقم الحديث</label><input name="hadith_number" id="h-number"></div>
+              <div><label for="h-url" data-i18n="sourceUrl">رابط المصدر</label><input name="url" id="h-url" type="url" dir="ltr"></div>
+            </div>
+            <label for="h-note" data-i18n="notes">ملاحظات</label>
+            <input name="note" id="h-note">
+            <label class="verify"><input type="checkbox" name="verified" value="true" required> <span data-i18n="verifyRecord">راجعتُ هذا السجل مقابل المصدر المذكور.</span></label>
+            <div class="form-actions"><button type="submit" class="btn btn-primary" data-i18n="addHadith">إضافة الحديث</button></div>
+          </form>
+        </article>
+
+        <article class="glass card">
+          <div class="form-actions between">
+            <h2 data-i18n="manageRecords">إدارة السجلات المحلية</h2>
+            <button type="button" class="btn btn-ghost" id="refresh-records" data-i18n="loadRecords">تحميل السجلات</button>
+          </div>
+          <div id="admin-records" class="records-list"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <aside class="notice glass" aria-label="تنبيه أمانة البحث">
+    <strong data-i18n="ethicsTitle">أمانة البحث:</strong> <span data-i18n="ethicsText">يبحث هذا النموذج في المكتبة الشاملة عبر وصلتها الرسمية للقراءة فقط، ويحتفظ بفهارسك المحلية منفصلة. لا يتحقق من صحة الأحاديث أو أسانيدها أو درجاتها عند العلماء. راجع الصفحة الأصلية قبل الاقتباس، ولا تُعرض أرقام الصفحات إلا إذا كانت محفوظة لطبعة محددة.</span>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p><strong data-i18n="brandTitle">دليل الأبحاث الحديثية</strong> — <span data-i18n="footerLine">الاسترجاع الدلالي ونظام الاستشهاد لنصوص أحاديث الأحكام</span></p>
+    <p data-i18n="footerNote">استرجاع فقط — لا أحكام مولّدة آليًا</p>
+  </div>
+</footer>
+
+<!-- ===================== LEFT NAVIGATION DRAWER ===================== -->
+<div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+<aside class="nav-drawer glass-strong" id="nav-drawer" aria-label="التنقل الرئيسي" data-i18n-title="mainNav" aria-hidden="true">
+  <div class="drawer-head">
+    <strong data-i18n="mainNav">التنقل الرئيسي</strong>
+    <button type="button" class="icon-btn drawer-close" id="drawer-close" aria-label="إغلاق" data-i18n-title="close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <nav class="drawer-nav" aria-label="التنقل الرئيسي" data-i18n-title="mainNav">
+    <button type="button" class="nav-link active" data-view="ask" data-i18n="navAsk">اسأل</button>
+    <button type="button" class="nav-link" data-view="books" data-i18n="navWorkspace">مساحة العمل</button>
+    <button type="button" class="nav-link user-only" data-view="history" id="history-link" hidden data-i18n="navHistory">السجل</button>
+    <button type="button" class="nav-link admin-only" data-view="users" id="users-link" hidden data-i18n="navUsers">المستخدمون</button>
+    <button type="button" class="nav-link admin-only" data-view="add" id="sources-link" hidden data-i18n="navSources">المصادر</button>
+    <button type="button" class="nav-link admin-only" data-view="admin" data-i18n="navAdmin">الإدارة</button>
+  </nav>
+</aside>
+
+<!-- ===================== AUTH DIALOG ===================== -->
+<dialog class="auth-dialog glass-strong" id="auth-dialog">
+  <div class="auth-head">
+    <h2 data-i18n="authTitle">الحساب</h2>
+    <button type="button" class="icon-btn" id="auth-close" aria-label="إغلاق" data-i18n-title="close"><span aria-hidden="true">×</span></button>
+  </div>
+  <p id="auth-hint" class="muted" data-i18n="authHint">أول حساب يُنشأ يصبح حساب المدير.</p>
+
+  <button type="button" class="btn btn-google" id="google-signin" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.06H12v3.9h5.38a4.6 4.6 0 0 1-2 3.02v2.5h3.23c1.89-1.74 2.99-4.3 2.99-7.36Z"/>
+      <path fill="#34A853" d="M12 22c2.7 0 4.96-.9 6.61-2.41l-3.23-2.5c-.9.6-2.04.96-3.38.96-2.6 0-4.8-1.75-5.59-4.1H3.07v2.58A10 10 0 0 0 12 22Z"/>
+      <path fill="#FBBC05" d="M6.41 13.95a6 6 0 0 1 0-3.9V7.47H3.07a10 10 0 0 0 0 9.06l3.34-2.58Z"/>
+      <path fill="#EA4335" d="M12 6.04c1.47 0 2.79.5 3.83 1.5l2.87-2.87A9.6 9.6 0 0 0 12 2a10 10 0 0 0-8.93 5.47l3.34 2.58C7.2 7.79 9.4 6.04 12 6.04Z"/>
+    </svg>
+    <span data-i18n="googleSignIn">المتابعة باستخدام Gmail</span>
+  </button>
+  <p id="google-note" class="muted google-note" data-i18n="googleNote" hidden>دخول Gmail غير مُعدّ على هذا الخادم.</p>
+
+  <form id="auth-setup" class="auth-form" hidden>
+    <label for="setup-username" data-i18n="username">اسم المستخدم</label>
+    <input id="setup-username" name="username" required autocomplete="username" pattern="[a-z0-9._-]{3,32}" dir="ltr">
+    <label for="setup-email" data-i18n="email">البريد الإلكتروني</label>
+    <input id="setup-email" name="email" type="email" required autocomplete="email" dir="ltr">
+    <label for="setup-password" data-i18n="password">كلمة المرور</label>
+    <input id="setup-password" name="password" type="password" required minlength="12" autocomplete="new-password">
+    <button type="submit" class="btn btn-primary" data-i18n="createAdmin">إنشاء حساب المدير</button>
+  </form>
+
+  <form id="auth-login" class="auth-form">
+    <label for="login-username" data-i18n="usernameOrEmail">اسم المستخدم أو البريد الإلكتروني</label>
+    <input id="login-username" name="username" required autocomplete="username" dir="ltr">
+    <label for="login-password" data-i18n="password">كلمة المرور</label>
+    <input id="login-password" name="password" type="password" required autocomplete="current-password">
+    <button type="submit" class="btn btn-primary" data-i18n="signIn">دخول</button>
+    <button type="button" class="link-btn" id="show-register" data-i18n="needAccount">ليس لديك حساب؟ إنشاء حساب</button>
+  </form>
+
+  <form id="auth-register" class="auth-form" hidden>
+    <label for="register-username" data-i18n="username">اسم المستخدم</label>
+    <input id="register-username" name="username" required autocomplete="username" pattern="[a-z0-9._-]{3,32}" dir="ltr">
+    <label for="register-email" data-i18n="email">البريد الإلكتروني</label>
+    <input id="register-email" name="email" type="email" required autocomplete="email" dir="ltr">
+    <label for="register-password" data-i18n="password">كلمة المرور</label>
+    <input id="register-password" name="password" type="password" required minlength="8" autocomplete="new-password">
+    <button type="submit" class="btn btn-primary" data-i18n="createUser">إنشاء حساب مستخدم</button>
+    <button type="button" class="link-btn" id="show-login" data-i18n="haveAccount">لديك حساب؟ تسجيل الدخول</button>
+  </form>
+
+  <div class="auth-actions" hidden id="auth-signed-actions">
+    <button type="button" class="btn btn-ghost" id="auth-logout" data-i18n="signOut">تسجيل الخروج</button>
+    <button type="button" class="btn btn-primary" id="auth-admin-link" hidden data-i18n="adminPanel">لوحة الإدارة</button>
+  </div>
+
+  <p id="auth-error" class="error" role="status"></p>
+</dialog>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

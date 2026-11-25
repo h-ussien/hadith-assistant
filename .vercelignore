@@ -1,0 +1,6 @@
+research.db
+tests/
+__pycache__/
+app/__pycache__/
+api/__pycache__/
+*.pyc

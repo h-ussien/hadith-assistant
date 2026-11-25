@@ -1,0 +1,18 @@
+@startuml
+class User { +getName() +getRole() }
+class Admin { +addHadith() +importRecords() }
+class Hadith { +getText() +getSource() }
+class Quotation { +getText() +getSource() }
+class Citation { +generateFootnote() }
+class Search { +searchHadith() +searchQuotation() }
+class Database { +findHadith() +findQuotation() +addHadith() }
+class UI { +search() +displayResults() }
+User <|-- Admin
+UI --> Search
+Search --> Database
+Database --> Hadith
+Database --> Quotation
+Citation --> Hadith
+Citation --> Quotation
+Admin --> Database
+@enduml

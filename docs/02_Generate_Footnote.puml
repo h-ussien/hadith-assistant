@@ -1,0 +1,13 @@
+@startuml
+title 02 Generate Footnote
+actor Student
+participant UI
+participant Citation
+participant Hadith
+Student -> UI : select Hadith
+UI -> Citation : generateFootnote(record)
+Citation -> Hadith : getText(), getSource()
+Hadith -> Citation : available metadata
+Citation -> UI : Arabic footnote / missing-data notice
+UI -> Student : display footnote
+@enduml

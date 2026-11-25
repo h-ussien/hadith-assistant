@@ -1,0 +1,16 @@
+@startuml
+title 01 Search Hadith
+actor Student
+participant UI
+participant Search
+participant Database
+participant Hadith
+Student -> UI : search(query)
+UI -> Search : searchHadith(query)
+Search -> Database : findHadith(query)
+Database -> Hadith : getText(), getSource()
+Hadith -> Database : text, source
+Database -> Search : matching records
+Search -> UI : search results
+UI -> Student : displayResults()
+@enduml

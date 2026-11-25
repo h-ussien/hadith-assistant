@@ -1,0 +1,3 @@
+# Only needed when DATABASE_URL is set (Vercel + Neon). Local SQLite runs need
+# no third-party packages.
+psycopg[binary]>=3.1,<4

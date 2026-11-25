@@ -1,0 +1,11 @@
+digraph G { graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.6"]; node [shape=record, fontname="Helvetica", fontsize=10, style=filled, fillcolor="#eef5fc", color="#446888"]; edge [color="#47647e", arrowsize=.7];
+Handler [label="{Handler (server.py)|+ do_GET()\l+ do_POST()\l+ send_json()\l+ is_admin()\l}"];
+ResearchService [label="{ResearchService|+ search_hadith(query)\l+ search_all(kind, query)\l+ view_source(id, kind)\l+ generate_footnote(record)\l}"];
+HadithMatcher [label="{HadithMatcher|+ normalize(text)\l+ score(query, passage)\l+ find_hadith(query, records)\l}"];
+CitationFormatter [label="{CitationFormatter|+ generate_footnote(record)\l}"];
+CatalogRepository [label="{CatalogRepository|+ get_all(kind)\l+ get_imported(kind)\l+ browse(kind, limit)\l+ store_import(records, file)\l}"];
+CatalogImportService [label="{CatalogImportService|+ import_records(file, content)\l+ create_hadith(payload)\l+ delete_record(payload)\l}"];
+AdminAuthenticator [label="{AdminAuthenticator|+ setup(password)\l+ login(password)\l+ authorized(token)\l}"];
+Handler -> ResearchService; Handler -> CatalogImportService; Handler -> AdminAuthenticator; Handler -> CatalogRepository;
+ResearchService -> HadithMatcher; ResearchService -> CitationFormatter; ResearchService -> CatalogRepository;
+}
