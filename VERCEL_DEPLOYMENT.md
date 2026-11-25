@@ -14,8 +14,15 @@ automatically in Postgres on the first request.
 
 ## 1. Push the project
 
-This folder is not currently a git repository. Initialise one and push it to
-GitHub/GitLab/Bitbucket:
+This project is already connected to:
+
+```text
+https://github.com/h-ussien/hadith-assistant
+```
+
+`main` is pushed and clean. If you clone it elsewhere, just import that
+repository into Vercel. If you start from a different folder, initialise it and
+push your own remote:
 
 ```powershell
 git init
