@@ -10,6 +10,9 @@ const I18N = {
     brandSubtitle: 'الاسترجاع والتوثيق لنصوص أحاديث الأحكام والنقولات',
     mainNav: 'التنقل الرئيسي', navAsk: 'اسأل', navWorkspace: 'مساحة العمل', newChat: 'محادثة جديدة',
     navHistory: 'السجل', navUsers: 'المستخدمون', navSources: 'المصادر', navAdmin: 'الإدارة',
+    historyGateTitle: 'السجل للأعضاء فقط',
+    historyGateText: 'إذا أردت حفظ عمليات البحث والعودة إليها لاحقًا، أنشئ حسابًا أو سجّل الدخول. يمكنك البحث الآن دون حساب.',
+    historyGateCreate: 'إنشاء حساب', historyGateLater: 'لاحقًا',
     themeToggle: 'تبديل المظهر', openMenu: 'فتح القائمة', signIn: 'دخول',
     chatTitle: 'مساعد البحث في الأحاديث والنقولات',
     chatSubtitle: 'استرجاع النصوص ومصادرها من المكتبة الشاملة أو الدرر السنية أو فهارسك المحلية — دون توليد فتاوى أو أحكام.',
@@ -120,6 +123,9 @@ const I18N = {
     brandSubtitle: 'Retrieval and citation for hadith and classical quotations',
     mainNav: 'Main navigation', navAsk: 'Ask', navWorkspace: 'Workspace', newChat: 'New chat',
     navHistory: 'History', navUsers: 'Users', navSources: 'Sources', navAdmin: 'Admin',
+    historyGateTitle: 'History is for members',
+    historyGateText: 'If you want to keep your searches and return to them later, create an account or sign in. You can still search without one.',
+    historyGateCreate: 'Create account', historyGateLater: 'Maybe later',
     themeToggle: 'Toggle theme', openMenu: 'Open menu', signIn: 'Sign in',
     chatTitle: 'Hadith and quotation research assistant',
     chatSubtitle: 'Retrieve texts and their sources from Shamela, Dorar.net, or your local catalog — no legal rulings generated.',
@@ -351,6 +357,7 @@ function applyLanguage(next) {
   updateAuthUI(authStatus);
   updateAdminUI(authStatus);
   syncMethodNote();
+  syncComposerHeight();
 }
 
 const themeToggles = $$('#theme-toggle, #theme-toggle-sidebar');
@@ -374,9 +381,30 @@ $('lang-toggle').addEventListener('click', () => applyLanguage(lang === 'ar' ? '
 /* ------------------------------------------------------------
    Navigation and helpers
    ------------------------------------------------------------ */
+function clearConversation() {
+  $('conversation').replaceChildren();
+  $('chat-shell').classList.remove('has-results');
+  setStatus('');
+}
+
+const historyGate = $('history-gate');
+function openHistoryGate() {
+  closeNavDrawer();
+  if (!historyGate.open) historyGate.showModal();
+}
+function closeHistoryGate() {
+  if (historyGate.open) historyGate.close();
+}
+
 function setView(view) {
+  if (view === 'history' && !authStatus.user) {
+    openHistoryGate();
+    return;
+  }
   $$('.view').forEach((section) => { section.hidden = section.id !== view + '-view'; });
   $$('.nav-link').forEach((button) => button.classList.toggle('active', button.dataset.view === view));
+  document.body.classList.toggle('ask-active', view === 'ask');
+  if (view === 'ask') clearConversation();
   closeNavDrawer();
   if (view === 'books') showBookStats();
   if (view === 'users' && authStatus.admin) loadUsersTable();
@@ -420,17 +448,11 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && navDrawer.classList.contains('is-open')) closeNavDrawer();
 });
 
-const composerWrap = $('composer-wrap');
-function syncComposerDock() {
-  const docked = window.scrollY > 24;
-  if (docked && !composerWrap.classList.contains('is-docked')) {
-    document.documentElement.style.setProperty('--composer-h', `${$('ask-form').offsetHeight}px`);
-  }
-  composerWrap.classList.toggle('is-docked', docked);
-  document.body.classList.toggle('composer-docked', docked);
+function syncComposerHeight() {
+  document.documentElement.style.setProperty('--composer-h', `${$('ask-form').offsetHeight}px`);
 }
-window.addEventListener('scroll', syncComposerDock, { passive: true });
-syncComposerDock();
+window.addEventListener('resize', syncComposerHeight);
+syncComposerHeight();
 
 function setStatus(text) {
   const target = $('status');
@@ -545,6 +567,7 @@ function syncSendButton() { sendButton.disabled = !queryInput.value.trim(); }
 function resizeInput() {
   queryInput.style.height = 'auto';
   queryInput.style.height = Math.min(queryInput.scrollHeight, 200) + 'px';
+  syncComposerHeight();
 }
 queryInput.addEventListener('input', () => { syncSendButton(); resizeInput(); });
 queryInput.addEventListener('keydown', (event) => {
@@ -570,7 +593,7 @@ function recordHistory(query, scope, resultCount) {
 }
 
 async function runSearch(query, scope) {
-  $('empty-state').hidden = true;
+  clearConversation();
   $('chat-shell').classList.add('has-results');
   const conversation = $('conversation');
   const fromShamela = scope === 'shamela';
@@ -634,15 +657,6 @@ $('ask-form').addEventListener('submit', (event) => {
   syncSendButton();
   resizeInput();
   queryInput.focus();
-});
-
-$$('.chip').forEach((chip) => {
-  chip.addEventListener('click', () => {
-    queryInput.value = chip.dataset.q;
-    $('scope').value = 'shamela';
-    syncSendButton();
-    $('ask-form').requestSubmit();
-  });
 });
 
 /* ------------------------------------------------------------
@@ -796,6 +810,24 @@ $('login-btn').addEventListener('click', () => {
 $('auth-close').addEventListener('click', () => authDialog.close());
 $('show-register').addEventListener('click', () => showAuthForm('register'));
 $('show-login').addEventListener('click', () => showAuthForm('login'));
+
+$('history-gate-close').addEventListener('click', closeHistoryGate);
+$('history-gate-later').addEventListener('click', closeHistoryGate);
+historyGate.addEventListener('click', (event) => {
+  if (event.target === historyGate) closeHistoryGate();
+});
+$('history-gate-login').addEventListener('click', () => {
+  closeHistoryGate();
+  $('auth-error').textContent = '';
+  showAuthForm(authStatus.needsSetup ? 'setup' : 'login');
+  if (!authDialog.open) authDialog.showModal();
+});
+$('history-gate-register').addEventListener('click', () => {
+  closeHistoryGate();
+  $('auth-error').textContent = '';
+  showAuthForm(authStatus.needsSetup ? 'setup' : 'register');
+  if (!authDialog.open) authDialog.showModal();
+});
 
 $('google-signin').addEventListener('click', async () => {
   $('auth-error').textContent = '';

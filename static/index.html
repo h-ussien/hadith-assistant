@@ -17,7 +17,7 @@
 </script>
 <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body class="ask-active">
 <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
     <linearGradient id="brandGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
@@ -55,7 +55,7 @@
   <nav class="sidebar-nav" aria-label="التنقل الرئيسي" data-i18n-title="mainNav">
     <button type="button" class="nav-link active" data-view="ask" data-i18n="navAsk">اسأل</button>
     <button type="button" class="nav-link" data-view="books" data-i18n="navWorkspace">مساحة العمل</button>
-    <button type="button" class="nav-link user-only" data-view="history" hidden data-i18n="navHistory">السجل</button>
+    <button type="button" class="nav-link" data-view="history" data-i18n="navHistory">السجل</button>
     <button type="button" class="nav-link admin-only" data-view="users" hidden data-i18n="navUsers">المستخدمون</button>
     <button type="button" class="nav-link admin-only" data-view="add" hidden data-i18n="navSources">المصادر</button>
     <button type="button" class="nav-link admin-only" data-view="admin" data-i18n="navAdmin">الإدارة</button>
@@ -78,7 +78,7 @@
       <a class="brand" href="#" id="brand-home" aria-label="الصفحة الرئيسية">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 48 48" fill="none">
-            <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#brandGrad)"/>
+            <rect x="2" y="2" width="44" height="44" rx="14" fill="#10a37f"/>
             <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".94"/>
             <path d="M35 14.6c-3.3-1.8-6.6-1.8-9.9 0v18.2c3.3-1.8 6.6-1.8 9.9 0V14.6Z" fill="white" fill-opacity=".72"/>
             <path d="M24 15v17" stroke="white" stroke-opacity=".6"/>
@@ -113,52 +113,38 @@
   <section class="view" id="ask-view">
     <div class="chat-shell" id="chat-shell">
       <div class="search-hero">
-        <div class="chat-head">
-          <h1 data-i18n="chatTitle">مساعد البحث في الأحاديث والنقولات</h1>
-          <p data-i18n="chatSubtitle">استرجاع النصوص ومصادرها من المكتبة الشاملة أو الدرر السنية أو فهارسك المحلية — دون توليد فتاوى أو أحكام.</p>
-        </div>
-
-        <div class="composer-wrap" id="composer-wrap">
-          <form class="composer glass-strong" id="ask-form" dir="rtl">
-            <label class="sr-only" for="query" data-i18n="queryLabel">اكتب نص الحديث أو النقل للبحث</label>
-            <textarea id="query" rows="2" dir="auto" data-i18n-placeholder="queryPlaceholder" placeholder="اكتب النص هنا… (Enter للإرسال)"></textarea>
-            <div class="composer-rule"></div>
-            <div class="composer-bar">
-              <label class="sr-only" for="scope" data-i18n="scopeLabel">نطاق البحث</label>
-              <select id="scope">
-                <option value="shamela" data-i18n="scopeShamela">المكتبة الشاملة</option>
-                <option value="dorar" data-i18n="scopeDorar">الدرر السنية (dorar.net)</option>
-                <option value="hadith" data-i18n="scopeHadith">الأحاديث (الفهرس المحلي)</option>
-                <option value="quote" data-i18n="scopeQuote">النقولات (الفهرس المحلي)</option>
-                <option value="all" data-i18n="scopeAll">كل المصادر (المحلي)</option>
-              </select>
-              <span class="method-note" id="method-note" data-i18n="methodNote">النتائج من أربعة كتب فقط: صحيح البخاري، صحيح مسلم، سنن أبي داود، جامع الترمذي — استرجاع نصوص بلا فتاوى.</span>
-              <span id="status" class="status" role="status"></span>
-              <button type="submit" class="send-btn" id="search" aria-label="إرسال" data-i18n-title="send" disabled>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
-              </button>
-            </div>
-          </form>
+        <div class="ask-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="2" y="2" width="44" height="44" rx="14" fill="#10a37f"/>
+            <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".95"/>
+            <path d="M35 14.6c-3.3-2-6.6-2-9.9 0v18.2c3.3-2 6.6-2 9.9 0V14.6Z" fill="white" fill-opacity=".75"/>
+          </svg>
         </div>
       </div>
 
-      <div class="conversation" id="conversation" aria-live="polite">
-        <div class="empty-state" id="empty-state">
-          <span class="empty-mark glass" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#brandGrad)"/>
-              <path d="M13 14.6c3.3-1.8 6.6-1.8 9.9 0v18.2c-3.3-1.8-6.6-1.8-9.9 0V14.6Z" fill="white" fill-opacity=".94"/>
-              <path d="M35 14.6c-3.3-1.8-6.6-1.8-9.9 0v18.2c3.3-1.8 6.6-1.8 9.9 0V14.6Z" fill="white" fill-opacity=".72"/>
-            </svg>
-          </span>
-          <p class="empty-title" data-i18n="emptyTitle">كلُّ نصٍّ بمصدره.</p>
-          <p class="empty-hint" data-i18n="emptyHint">اكتب مقطعًا من حديث أو نقل، وستظهر النصوص المطابقة من المكتبة الشاملة أو الدرر السنية أو فهارسك مع المصدر ورابطه.</p>
-          <div class="suggestions">
-            <button type="button" class="chip" data-q="إنما الأعمال بالنيات">إنما الأعمال بالنيات</button>
-            <button type="button" class="chip" data-q="الدين النصيحة">الدين النصيحة</button>
-            <button type="button" class="chip" data-q="من كان يؤمن بالله واليوم الآخر فليقل خيرا أو ليصمت">من كان يؤمن بالله واليوم الآخر فليقل خيرا أو ليصمت</button>
+      <div class="conversation" id="conversation" aria-live="polite"></div>
+
+      <div class="composer-wrap" id="composer-wrap">
+        <form class="composer glass-strong" id="ask-form" dir="rtl">
+          <label class="sr-only" for="query" data-i18n="queryLabel">اكتب نص الحديث أو النقل للبحث</label>
+          <textarea id="query" rows="2" dir="auto" data-i18n-placeholder="queryPlaceholder" placeholder="اكتب النص هنا… (Enter للإرسال)"></textarea>
+          <div class="composer-rule"></div>
+          <div class="composer-bar">
+            <label class="sr-only" for="scope" data-i18n="scopeLabel">نطاق البحث</label>
+            <select id="scope">
+              <option value="shamela" data-i18n="scopeShamela">المكتبة الشاملة</option>
+              <option value="dorar" data-i18n="scopeDorar">الدرر السنية (dorar.net)</option>
+              <option value="hadith" data-i18n="scopeHadith">الأحاديث (الفهرس المحلي)</option>
+              <option value="quote" data-i18n="scopeQuote">النقولات (الفهرس المحلي)</option>
+              <option value="all" data-i18n="scopeAll">كل المصادر (المحلي)</option>
+            </select>
+            <span class="method-note" id="method-note" data-i18n="methodNote">النتائج من أربعة كتب فقط: صحيح البخاري، صحيح مسلم، سنن أبي داود، جامع الترمذي — استرجاع نصوص بلا فتاوى.</span>
+            <span id="status" class="status" role="status"></span>
+            <button type="submit" class="send-btn" id="search" aria-label="إرسال" data-i18n-title="send" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </section>
@@ -362,12 +348,26 @@
   <nav class="drawer-nav" aria-label="التنقل الرئيسي" data-i18n-title="mainNav">
     <button type="button" class="nav-link active" data-view="ask" data-i18n="navAsk">اسأل</button>
     <button type="button" class="nav-link" data-view="books" data-i18n="navWorkspace">مساحة العمل</button>
-    <button type="button" class="nav-link user-only" data-view="history" id="history-link" hidden data-i18n="navHistory">السجل</button>
+    <button type="button" class="nav-link" data-view="history" id="history-link" data-i18n="navHistory">السجل</button>
     <button type="button" class="nav-link admin-only" data-view="users" id="users-link" hidden data-i18n="navUsers">المستخدمون</button>
     <button type="button" class="nav-link admin-only" data-view="add" id="sources-link" hidden data-i18n="navSources">المصادر</button>
     <button type="button" class="nav-link admin-only" data-view="admin" data-i18n="navAdmin">الإدارة</button>
   </nav>
 </aside>
+
+<!-- ===================== HISTORY GATE DIALOG ===================== -->
+<dialog class="auth-dialog history-dialog" id="history-gate" aria-labelledby="history-gate-title">
+  <div class="auth-head">
+    <h2 id="history-gate-title" data-i18n="historyGateTitle">السجل للأعضاء فقط</h2>
+    <button type="button" class="icon-btn" id="history-gate-close" aria-label="إغلاق" data-i18n-title="close"><span aria-hidden="true">×</span></button>
+  </div>
+  <p class="muted" data-i18n="historyGateText">إذا أردت حفظ عمليات البحث والعودة إليها لاحقًا، أنشئ حسابًا أو سجّل الدخول. يمكنك البحث الآن دون حساب.</p>
+  <div class="history-gate-actions">
+    <button type="button" class="btn btn-brand" id="history-gate-register" data-i18n="historyGateCreate">إنشاء حساب</button>
+    <button type="button" class="btn btn-ghost" id="history-gate-login" data-i18n="signIn">دخول</button>
+    <button type="button" class="link-btn" id="history-gate-later" data-i18n="historyGateLater">لاحقًا</button>
+  </div>
+</dialog>
 
 <!-- ===================== AUTH DIALOG ===================== -->
 <dialog class="auth-dialog glass-strong" id="auth-dialog">
