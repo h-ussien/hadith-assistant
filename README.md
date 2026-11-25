@@ -54,4 +54,4 @@ The interface has an off-white light palette and an **EN / ع** switch for Engli
 
 ## Hosting on Vercel (free Hobby plan)
 
-`vercel.json` maps the UI to `static/`, `/api/*` to a Python function in `api/index.py`, and adds free Neon Postgres persistence through `DATABASE_URL`. Local `python server.py` behavior is unchanged. See **`VERCEL_DEPLOYMENT.md`** for the complete setup, environment variables, and Hobby limits. This remains an educational MVP, not a production-grade hadith authentication service.
+Vercel builds the Python function from `server.py`; its WSGI `app` (in `wsgi_bridge.py`) serves both the API and the UI in `static/` using the original request path. `pyproject.toml` pins that entrypoint as `server:app`. Neon Postgres persistence is selected automatically when `DATABASE_URL` is set. Local `python server.py` behavior is unchanged. See **`VERCEL_DEPLOYMENT.md`** for the complete setup, environment variables, and Hobby limits. This remains an educational MVP, not a production-grade hadith authentication service.

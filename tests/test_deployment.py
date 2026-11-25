@@ -11,14 +11,15 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class TestVercelDeployment(unittest.TestCase):
-    def test_vercel_config_routes_api_and_static_files(self):
+    def test_vercel_config_has_no_rewrites(self):
+        # The WSGI app in server.py receives the original request path and
+        # serves both the API and static files itself.
         config = json.loads((ROOT / "vercel.json").read_text(encoding="utf-8"))
-        destinations = {rule["source"]: rule["destination"] for rule in config["rewrites"]}
-        self.assertEqual(destinations["/api/(.*)"], "/api/index.py")
-        self.assertEqual(destinations["/app.js"], "/static/app.js")
-        self.assertEqual(destinations["/style.css"], "/static/style.css")
-        self.assertEqual(destinations["/"], "/static/index.html")
+        self.assertNotIn("rewrites", config)
         self.assertEqual(config["functions"]["api/index.py"]["maxDuration"], 60)
+
+    def test_server_exposes_wsgi_app(self):
+        self.assertTrue(callable(server.app))
 
     def test_postgres_sql_translation(self):
         sql = data._pg_sql(

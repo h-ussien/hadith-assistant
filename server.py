@@ -399,10 +399,13 @@ class Handler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 
-# Vercel can also detect this root file as a Python entrypoint. Exporting the
-# same handler keeps that build valid even though vercel.json routes /api/* to
-# api/index.py.
-handler = Handler
+# Vercel's Python framework preset loads this root file as a WSGI app. Import
+# the bridge lazily so local `python server.py` runs stay dependency-free and
+# there is no circular import at module load time.
+def app(environ, start_response):
+    from wsgi_bridge import app as wsgi_app
+
+    return wsgi_app(environ, start_response)
 
 
 if __name__ == "__main__":

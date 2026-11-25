@@ -12,3 +12,6 @@ __pycache__/
 
 # Vercel local state
 .vercel/
+
+.vercel
+.env*
